@@ -1,6 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import Navigation from '@/components/Navigation'
+import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,9 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen bg-white`}>
+      <body className={`${inter.className} min-h-screen bg-stone-50`}>
         <div className="pt-2"> {/* Added padding wrapper */}
           <Navigation />
+          <Analytics />
           {children}
         </div>
       </body>
