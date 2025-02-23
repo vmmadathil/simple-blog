@@ -4,24 +4,20 @@ import { notFound } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import type { Metadata } from 'next'
 
-// Import specific Next.js types
-import type { ResolvingMetadata } from 'next'
-
-// Define props types using Next.js internal type patterns
 type PageProps = {
   params: Promise<{ slug: string }> | undefined
-  searchParams?: { [key: string]: string | string[] | undefined }
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }> | undefined
 }
 
 export async function generateMetadata(
-  props: PageProps,
-  parent: ResolvingMetadata
+  props: PageProps
 ): Promise<Metadata> {
-  const slug = props.params ? (await props.params).slug : notFound()
+  if (!props.params) notFound()
+  const { slug } = await props.params
   const post = await getPost(slug)
-  
+ 
   return {
-    title: `${post.title} | Visakh Madathil`,
+    title: `${post.title} | Your Name`,
   }
 }
 
@@ -34,18 +30,20 @@ async function getPost(slug: string) {
       title: slug.split('-').join(' '),
       content
     }
-  } catch (e) {
+  } catch {
     notFound()
   }
 }
 
 export default async function BlogPost(props: PageProps) {
-  const slug = props.params ? (await props.params).slug : notFound()
+  if (!props.params) notFound()
+  const { slug } = await props.params
   const post = await getPost(slug)
  
   return (
     <main className="max-w-2xl mx-auto px-6 py-12">
       <article>
+        <h1 className="text-3xl font-serif text-gray-900 mb-8">{post.title}</h1>
         <div className="prose prose-green max-w-none">
           <ReactMarkdown>{post.content}</ReactMarkdown>
         </div>
