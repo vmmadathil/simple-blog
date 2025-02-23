@@ -2,12 +2,6 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import Link from 'next/link'
 
-type Post = {
-  slug: string
-  title: string
-  date: string
-}
-
 async function getPosts() {
   const postsDirectory = path.join(process.cwd(), 'posts')
   const filenames = await fs.readdir(postsDirectory)

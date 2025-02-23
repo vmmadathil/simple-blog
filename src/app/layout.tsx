@@ -1,12 +1,8 @@
 import './globals.css'
-import { Inter, Merriweather } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import Navigation from '@/components/Navigation'
 
 const inter = Inter({ subsets: ['latin'] })
-const merriweather = Merriweather({ 
-  weight: ['400', '700'],
-  subsets: ['latin']
-})
 
 export const metadata = {
   title: 'Visakh Madathil', // Change this to your name
