@@ -43,7 +43,6 @@ export default async function BlogPost(props: PageProps) {
   return (
     <main className="max-w-2xl mx-auto px-6 py-12">
       <article>
-        <h1 className="text-3xl font-serif text-gray-900 mb-8">{post.title}</h1>
         <div className="prose prose-green max-w-none">
           <ReactMarkdown>{post.content}</ReactMarkdown>
         </div>
