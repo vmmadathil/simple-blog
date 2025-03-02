@@ -17,7 +17,7 @@ export async function generateMetadata(
   const post = await getPost(slug)
  
   return {
-    title: `${post.title} | Your Name`,
+    title: `${post.title} | Visakh Madathil`,
   }
 }
 
