@@ -3,6 +3,7 @@ import path from 'path'
 import { notFound } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import type { Metadata } from 'next'
+import Comments from '@/components/Comments'
 
 type PageProps = {
   params: Promise<{ slug: string }> | undefined
@@ -47,6 +48,8 @@ export default async function BlogPost(props: PageProps) {
           <ReactMarkdown>{post.content}</ReactMarkdown>
         </div>
       </article>
+      <Comments title={post.title} />
     </main>
   )
 }
+
