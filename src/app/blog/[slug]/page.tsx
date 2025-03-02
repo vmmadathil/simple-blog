@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import type { Metadata } from 'next'
 import Comments from '@/components/Comments'
+import ClientMarkdown from '@/components/ClientMarkdown'
 
 type PageProps = {
   params: Promise<{ slug: string }> | undefined
@@ -45,9 +46,10 @@ export default async function BlogPost(props: PageProps) {
     <main className="max-w-2xl mx-auto px-6 py-12">
       <article>
         <div className="prose prose-green max-w-none">
-          <ReactMarkdown>{post.content}</ReactMarkdown>
+          <ClientMarkdown content={post.content} />
         </div>
       </article>
+      <div className="my-12 border-t border-gray-200"></div>
       <Comments title={post.title} />
     </main>
   )
