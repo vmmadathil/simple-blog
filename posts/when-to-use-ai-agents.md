@@ -1,6 +1,6 @@
 # When to Use AI Agents
 
-I see a lot of people trying to build an AI agent, but just because you can doesn't mean you should. Let's unpack when it's appropriate to build one.
+I see a lot of customers trying to build AI agents and unnecessarily complicating their lives. Let's unpack when it's appropriate to build one.
 
 ## What's an Agent?
 
