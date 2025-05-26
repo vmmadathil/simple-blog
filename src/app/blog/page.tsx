@@ -7,6 +7,12 @@ function formatTitle(slug: string): string {
     return slug
       .split('-')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .map(word => {
+        // Convert specific acronyms to uppercase
+        if (word.toLowerCase() === 'ai') return 'AI';
+        if (word.toLowerCase() === 'rag') return 'RAG';
+        return word;
+      })
       .join(' ')
   }
   
