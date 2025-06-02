@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 import Link from 'next/link'
+import { execSync } from 'child_process'
 
 function formatTitle(slug: string): string {
     // Convert hyphenated-title to Title With Spaces
@@ -14,6 +15,28 @@ function formatTitle(slug: string): string {
         return word;
       })
       .join(' ')
+  }
+
+  function getGitDate(filePath: string): string {
+    try {
+      // Check if git is available and we're in a git repo
+      execSync('git rev-parse --git-dir', { stdio: 'ignore' })
+      
+      // Get the date of the first commit for this file
+      const gitDate = execSync(
+        `git log --follow --format=%ai --reverse "${filePath}" | head -1`, 
+        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }
+      ).trim()
+      
+      if (gitDate) {
+        return new Date(gitDate).toISOString().split('T')[0]
+      }
+    } catch (error) {
+      console.warn(`Could not get git date for ${filePath}`)
+    }
+    
+    // Fallback to current date
+    return new Date().toISOString().split('T')[0]
   }
   
   async function getPosts() {
@@ -29,7 +52,7 @@ function formatTitle(slug: string): string {
         return {
           slug,
           title: formatTitle(slug),
-          date: stats.mtime.toISOString().split('T')[0]
+          date: getGitDate(slug)
         }
       })
     )
