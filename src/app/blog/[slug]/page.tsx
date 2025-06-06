@@ -11,15 +11,31 @@ type PageProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }> | undefined
 }
 
+function formatTitle(slug: string): string {
+  // Convert hyphenated-title to Title With Spaces
+  return slug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map(word => {
+      // Convert specific acronyms to uppercase
+      if (word.toLowerCase() === 'ai') return 'AI';
+      if (word.toLowerCase() === 'rag') return 'RAG';
+      return word;
+    })
+    .join(' ')
+}
+
 export async function generateMetadata(
   props: PageProps
 ): Promise<Metadata> {
   if (!props.params) notFound()
   const { slug } = await props.params
-  const post = await getPost(slug)
+  //const post = await getPost(slug)
+  const titleSlug = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')
+  const post = formatTitle(titleSlug)
  
   return {
-    title: `${post.title} | Visakh Madathil`,
+    title: `${post} | Visakh Madathil`,
   }
 }
 
