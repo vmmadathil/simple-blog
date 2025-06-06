@@ -1,7 +1,6 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 import Link from 'next/link'
-import { execSync } from 'child_process'
 
 function formatTitle(slug: string): string {
     // Convert hyphenated-title to Title With Spaces
@@ -17,27 +16,7 @@ function formatTitle(slug: string): string {
       .join(' ')
   }
 
-  function getGitDate(filePath: string): string {
-    try {
-      // Check if git is available and we're in a git repo
-      execSync('git rev-parse --git-dir', { stdio: 'ignore' })
-      
-      // Get the date of the first commit for this file
-      const gitDate = execSync(
-        `git log --follow --format=%ai --reverse "${filePath}" | head -1`, 
-        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }
-      ).trim()
-      
-      if (gitDate) {
-        return new Date(gitDate).toISOString().split('T')[0]
-      }
-    } catch (error) {
-      console.warn(`Could not get git date for ${filePath}`)
-    }
-    
-    // Fallback to current date
-    return new Date().toISOString().split('T')[0]
-  }
+
   
   async function getPosts() {
     const postsDirectory = path.join(process.cwd(), 'posts')
@@ -49,10 +28,17 @@ function formatTitle(slug: string): string {
         const stats = await fs.stat(filePath)
         const slug = filename.replace('.md', '')
         
+        // Extract date from filename (YYYY-MM-DD-file-name.md)
+        const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})/)
+        const date = dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0]
+        
+        // Remove date from slug for title formatting
+        const titleSlug = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')
+        
         return {
           slug,
-          title: formatTitle(slug),
-          date: getGitDate(slug)
+          title: formatTitle(titleSlug),
+          date,
         }
       })
     )
