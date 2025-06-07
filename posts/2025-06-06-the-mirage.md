@@ -6,7 +6,7 @@ This is The Mirage: the illusion that your real life is happening somewhere else
 The Mirage shimmers just ahead, always promising that meaning lives in the next promotion, the next move, the next phase. Meanwhile, the days you're actually living slip by unnoticed, unremembered, unlived.
 
 ## The Texture of Sameness
-When every day follows the same pattern, time loses its texture. Monday morning feels the same as Thursday afternoon. June looks exactly like September. Last week becomes indistinguishable from last month. Your life starts to feel like background music—pleasant enough, but nothing you'd really choose to listen to.
+When every day follows the same pattern, time loses its texture. Monday morning feels the same as Thursday afternoon. June looks exactly like September. Last week becomes indistinguishable from last month. Your life starts to feel like background music; pleasant enough, but nothing you'd really choose to listen to.
 
 The sameness isn't just in your schedule but in your attention. You stop noticing the light changing outside your office window. You stop tasting your morning coffee. You stop seeing the faces of people you pass on the street. Everything becomes wallpaper.
 
