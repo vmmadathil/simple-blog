@@ -21,7 +21,7 @@ You walk down a street you've passed a hundred times and notice a mural you neve
 
 The day takes shape differently when you pay attention to it.
 
-## The Democracy of Presence
+## The Freedom of Presence
 You don't need permission to start noticing your life. You don't need a better job or a different apartment or a more interesting schedule. You need only the decision to show up to the life you already have, to find it worth your attention.
 
 This showing up is harder than it sounds. It means tasting your coffee instead of drinking it automatically. It means looking at your reflection instead of rushing past mirrors. It means feeling the weight of your footsteps on the sidewalk, the temperature of air on your skin, the specific quality of light at this hour on this day.
