@@ -125,7 +125,7 @@ User Request → Intent Router → "Data Query" → SQL Agent → Database → R
                             → "General" → Chat Agent → Direct LLM → Response
 ```
 
-**The trade-off**: Each agent can be optimized for its specific task (fast SQL agent, thorough research agent), but you need orchestration logic and agents might call each other, creating latency chains. Routing and retries can exponential increase latency chains and cost. 
+**The trade-off**: Each agent can be optimized for its specific task (fast SQL agent, thorough research agent), but you need orchestration logic and agents might call each other, creating latency chains. Routing and retries can exponentially increase latency chains and cost. 
 
 #### Pattern 6: Context Length Optimization
 
