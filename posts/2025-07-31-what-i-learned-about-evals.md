@@ -4,7 +4,7 @@ A year ago, I thought evaluations were straightforward: build some tests, run th
 
 We've all been there: staring at eval scores that look great on paper but somehow don't translate to better user experiences. Or worse, building comprehensive evaluation suites that are so complex they sit unused while the team ships based on gut feeling. 
 
-Here are the five most important lessons that fundamentally changed how I approach evals. Spoiler alert: it's messier and more domain-specific than most blog posts will tell you.
+Here are the six most important lessons that fundamentally changed how I approach evals. Spoiler alert: it's messier and more domain-specific than most blog posts will tell you.
 
 ## 1. Start Small and Simple (Seriously, Smaller Than You Think)
 
