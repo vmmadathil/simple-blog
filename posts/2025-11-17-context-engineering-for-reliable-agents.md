@@ -1,7 +1,10 @@
-*Production hits, and everything falls apart at turn 15*
+# Context Engineering for Reliable Agents
+
+*Yet another take on context engineering for agents*
+
 *11/17/2025*
 
-I've learned that context management isn't a prompt engineering problem -- it's a systems engineering problem. Recently, more attention is being given to **context engineering** as a determinant of agent success. In this post, I'm exploring my recent learnings in context engineering and offering implementation patterns. 
+ The of AI agents promise is intoxicating: autonomous systems that actually work. But there's a problem nobody talks about at conferences: in production, agents fail in ways that make no sense. Many of these failures can be mitigates, or even fully avoided, through thoughtful context management. I've learned that context management isn't a prompt engineering problem -- it's a systems engineering problem. Recently, more attention is being given to **context engineering** as a determinant of agent success. In this post, I'm exploring my recent learnings in context engineering and offering implementation patterns. 
 
 ## Contextual Erosion 
 
