@@ -37,15 +37,46 @@ New information enters at the working memory level. As it ages, it gets compress
 
 This architecture fundamentally changes how you think about context. Instead of asking "how can I fit everything into the context window?", you ask "what's the minimum context needed for this specific turn?" 
 
-| **Tier** | **Working Memory** | **Session Cache** | **Persistent Store** |
-|----------|-------------------|------------------|---------------------|
-| **Size** | 2-4K tokens | 10-20K tokens | Unlimited |
-| **Contents** | • Current query<br>• Active task<br>• Recent tools<br>• Errors | • Summary<br>• Decisions<br>• Failed paths<br>• Preferences | • Full history<br>• All outputs<br>• Audit trail<br>• Checkpoints |
-| **Eviction** | LRU | LFU | TTL |
-| **Coverage** | 95% | 30% | 5% |
-| **Latency** | 0ms | 10ms | 100ms |
-| **Flow →** | Aging after 3-4 turns | Aging after 5-10 turns | Archive after 11+ turns |
-| **← Flow** | Promotion on reference | Promotion on reference | Retrieval on demand |
+```mermaid
+flowchart LR
+    subgraph WM ["🧠 Working Memory"]
+        WM_size["2-4K tokens"]
+        WM_content["• Current query<br/>• Active task<br/>• Recent tools<br/>• Errors"]
+        WM_evict["LRU eviction"]
+        WM_coverage["95% coverage"]
+        WM_latency["0ms latency"]
+    end
+    
+    subgraph SC ["💾 Session Cache"]
+        SC_size["10-20K tokens"]
+        SC_content["• Summary<br/>• Decisions<br/>• Failed paths<br/>• Preferences"]
+        SC_evict["LFU eviction"]
+        SC_coverage["30% coverage"]
+        SC_latency["10ms latency"]
+    end
+    
+    subgraph PS ["📦 Persistent Store"]
+        PS_size["Unlimited"]
+        PS_content["• Full history<br/>• All outputs<br/>• Audit trail<br/>• Checkpoints"]
+        PS_evict["TTL eviction"]
+        PS_coverage["5% coverage"]
+        PS_latency["100ms latency"]
+    end
+    
+    WM -->|"Aging after<br/>3-4 turns"| SC
+    SC -->|"Archive after<br/>5-10 turns"| PS
+    SC -->|"Promotion on<br/>reference"| WM
+    PS -->|"Retrieval on<br/>demand"| SC
+    PS -->|"Promotion on<br/>reference"| WM
+    
+    classDef memory fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef cache fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef store fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    
+    class WM memory
+    class SC cache
+    class PS store
+```
 
 ## State Machines and the Prevention of Spiraling
 There's a specific failure mode I see constantly in production agents: the retry spiral. The agent tries an approach, it fails, the agent forgets it tried that approach, and tries it again. And again. And again. Sometimes completely restarting the task and losing all progress. Users watch in frustration as their supposedly intelligent agent bangs its head against the same wall repeatedly.
