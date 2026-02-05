@@ -8,7 +8,7 @@ A few years ago, [researchers documented](https://www.sciencedirect.com/science/
 
 But the bins are a trick a single bird can do. The fountain requires coordination and one bird's knowledge is useless without another bird's cooperation. The reliability in the mechanism isn't in any individual but baked into the culture of the flock. And the reason it works is that every bird can see what every other bird is doing. One watches the handle, another watches the water, and the ones waiting can see when it's time to move.
 
-I watched those cockatoos for a long time, and as I finally walked back home I started thinking about the systems I build for a living. I work on AI reliability. I've built hallucination detectors, traced failure chains through production systems, and watched defenses fail in ways their designers never anticipated. Months later, I have not been able to stop thinking about those birds, because I've come to believe that we are trying to make these systems reliable while unable to see what they are doing.
+I watched those cockatoos for a long time, and as I finally walked back home I started thinking about the systems I build for a living. I work on AI reliability and trustworthiness. I've built hallucination detectors, traced failure chains through production systems, and watched defenses fail in ways their designers never anticipated. Months later, I have not been able to stop thinking about those birds, because I've come to believe that we are trying to make these systems reliable while unable to see what they are doing.
 
 ---
 
@@ -16,7 +16,7 @@ I spent the last few years at AWS building and evaluating systems at production 
 
 Last year I led a talk and workshop on [hallucination detection](github.com/aws-samples/responsible_ai_reduce_hallucinations_for_genai_apps) at AWS re:Invent. My audience was engaged and asked sharp questions, but I couldn't shake the feeling that what I was presenting was not enough. I was showing people how to find the wreckage after the crash and not prevent the failure in the first place. These were good methods, methods that worked, and all of them operated on the output. None of them could see what had happened inside the model between receiving the input and producing the response. We were getting more sophisticated at describing what went wrong without getting any closer to watching it go wrong.
 
-The way we build AI reliability today splits the problem in two. You make the model as capable as possible through training, curated data and human feedback shaping its dispositions, and then you add defenses at deployment. Classifiers check whether inputs are appropriate. Retrieval systems ground the model's responses in approved sources. Output filters scan for toxicity and policy violations. Human reviewers spot-check the results.
+The way we build reliability into AI systems today splits the problem in two. You make the model as capable as possible through training, curated data and human feedback shaping its dispositions, and then you add defenses at deployment. Classifiers check whether inputs are appropriate. Retrieval systems ground the model's responses in approved sources. Output filters scan for toxicity and policy violations. Human reviewers spot-check the results.
 
 Every one of these checks sees the same thing. They see the input. They see the output. None of them can see what happens in between.
 
