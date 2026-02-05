@@ -8,12 +8,12 @@ export default function Navigation() {
           <Link href="/" className="text-3xl font-serif text-green-700 hover:text-green-800">
             VM
           </Link>
-          <div className="flex gap-6">
-            <Link href="/blog" className="text-gray-600 hover:text-green-700">
-              Blog
-            </Link>
+          <div className="flex" style={{ gap: '.5rem' }}>
             <Link href="/essays" className="text-gray-600 hover:text-green-700">
               Essays
+            </Link>
+            <Link href="/blog" className="text-gray-600 hover:text-green-700">
+              Blog
             </Link>
           </div>
         </div>
