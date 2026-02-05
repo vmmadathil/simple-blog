@@ -12,6 +12,9 @@ export default function Navigation() {
             <Link href="/blog" className="text-gray-600 hover:text-green-700">
               Blog
             </Link>
+            <Link href="/essays" className="text-gray-600 hover:text-green-700">
+              Essays
+            </Link>
           </div>
         </div>
       </div>
