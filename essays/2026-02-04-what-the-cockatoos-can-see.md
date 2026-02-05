@@ -16,9 +16,7 @@ I spent the last few years at AWS building and evaluating systems at production 
 
 Last year I led a talk and workshop on [hallucination detection](github.com/aws-samples/responsible_ai_reduce_hallucinations_for_genai_apps) at AWS re:Invent. My audience was engaged and asked sharp questions, but I couldn't shake the feeling that what I was presenting was not enough. I was showing people how to find the wreckage after the crash and not prevent the failure in the first place. These were good methods, methods that worked, and all of them operated on the output. None of them could see what had happened inside the model between receiving the input and producing the response. We were getting more sophisticated at describing what went wrong without getting any closer to watching it go wrong.
 
-Today's approach to AI reliability is mainly a two-stage process: make the model capable, then add guardrails. Training shapes dispositions through curated data and human feedback. Deployment adds the defenses: classifiers on inputs, retrieval to ground outputs, filters for toxicity, and humans spot-checking the rest.".
-
-Every one of these checks sees the same thing. They see the input. They see the output. None of them can see what happens in between.
+Today's approach to AI reliability is mainly a two-stage process: make the model capable, then add guardrails. Training shapes dispositions through curated data and human feedback. Deployment adds the defenses: classifiers on inputs, retrieval to ground outputs, filters for toxicity, and humans spot-checking the rest. Every one of these checks sees the input and output and not happens in between.
 
 We know training shapes dispositions, not guarantees. A model that is trained to be helpful will hallucinate when it struggles to produce a useful response. Even the most rigorously designed post-training environment won't prepare a model for all the edge cases it encounters in the wild. Nobody directly engineered intelligence into these systems. We created conditions and capability emerged from the interaction between model and data. And now we are trying to keep those systems honest using defenses that cannot observe the place where dishonesty happens.
 
@@ -30,9 +28,7 @@ Between 1985 and 1987, the Therac-25 killed six patients and seriously injured o
 
 The problem underneath the bug was that every layer of defense drew from the same well. The software had never been independently tested. It had been carried over from earlier models where hardware interlocks caught the errors it missed. The operators had been trained to trust the machine's readings, so when patients reported burning sensations, the staff assured them that was not possible. The error code "MALFUNCTION" appeared so frequently during normal operation that technicians learned to ignore it. The manufacturer's investigation process was designed to find hardware failures and couldn't conceive of software being at fault. What seemed like routine noise turned out to be lethal overdoses. 
 
-Each layer of defense had a hole and the holes aligned perfectly, because they all drew from the same source: the native reporting of the machine. The operators watched the interface, the technicians watched the error codes, the investigators reviewed the logs, and nobody monitored the beam. Every check in the system was a check on what the machine said it was doing, and not one was a measurement of what the machine was actually doing. 
-
-The Therac-25 was eventually fixed with independent hardware interlocks that measured the beam directly, observing what the machine was actually doing rather than trusting what the software reported.
+Each layer of defense had a hole and the holes aligned perfectly, because they all drew from the same source: the native reporting of the machine. The operators watched the interface, the technicians watched the error codes, the investigators reviewed the logs, and nobody monitored the beam. Every check in the system was a check on what the machine said it was doing, and not one was a measurement of what the machine was actually doing. The Therac-25 was eventually fixed with independent hardware interlocks that measured the beam directly, observing what the machine was actually doing rather than trusting what the software reported.
 
 ---
 
