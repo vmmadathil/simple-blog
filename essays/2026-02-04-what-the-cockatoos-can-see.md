@@ -16,7 +16,7 @@ I spent the last few years at AWS building and evaluating systems at production 
 
 Last year I led a talk and workshop on [hallucination detection](github.com/aws-samples/responsible_ai_reduce_hallucinations_for_genai_apps) at AWS re:Invent. My audience was engaged and asked sharp questions, but I couldn't shake the feeling that what I was presenting was not enough. I was showing people how to find the wreckage after the crash and not prevent the failure in the first place. These were good methods, methods that worked, and all of them operated on the output. None of them could see what had happened inside the model between receiving the input and producing the response. We were getting more sophisticated at describing what went wrong without getting any closer to watching it go wrong.
 
-The way we build reliability into AI systems today splits the problem in two. You make the model as capable as possible through training, curated data and human feedback shaping its dispositions, and then you add defenses at deployment. Classifiers check whether inputs are appropriate. Retrieval systems ground the model's responses in approved sources. Output filters scan for toxicity and policy violations. Human reviewers spot-check the results.
+Today's approach to AI reliability is mainly a two-stage process: make the model capable, then add guardrails. Training shapes dispositions through curated data and human feedback. Deployment adds the defenses: classifiers on inputs, retrieval to ground outputs, filters for toxicity, and humans spot-checking the rest.".
 
 Every one of these checks sees the same thing. They see the input. They see the output. None of them can see what happens in between.
 
