@@ -4,7 +4,7 @@ Chess and Go have been the standard tests of machine game-playing for decades. B
 
 If you believe LLM agents are going to negotiate contracts, manage supply chains, or broker deals on our behalf, you probably want to know how they handle a situation where four parties with competing interests have to trade, plan under uncertainty, and adapt to each other in real time. Settlers of Catan is a pretty good proxy. You're managing scarce resources, reading the table, negotiating trades, making probabilistic bets on dice rolls, and navigating a four-player economy where helping yourself sometimes means helping your opponent. It's the kind of messy, multi-stakeholder problem that frontier LLMs should theoretically be good at, and the kind that's hard to benchmark with multiple choice questions.
 
-So I sat four LLMs down at a Catan table: Claude Sonnet 4.5, Claude Haiku 4.5, Gemini 2.5 Flash, and Gemini 3 Flash Preview. No fine-tuning, no MCTS, no RL. Just a text prompt describing the board, the rules, and a numbered list of legal moves. They pick one, explain why, and jot notes to themselves for next turn. Forty-eight games, about 13,000 API calls, $25 in compute. I logged every decision.
+So I sat four LLMs down at a Catan table: Claude Sonnet 4.5, Claude Haiku 4.5, Gemini 2.5 Flash, and Gemini 3 Flash Preview. No fine-tuning, no MCTS, and no RL. Just a text prompt describing the board, the rules, and a numbered list of legal moves. They pick one, explain why, and jot notes to themselves for next turn. I made them play forty-eight games, spanning about 13,000 API calls and spending $25 in compute. 
 
 ## How It Works
 
@@ -103,7 +103,7 @@ Its pip counting, for whatever it's worth, is impeccable:
 
 Haiku 4.5 is the most volatile model in the tournament. Its wins are clean, with sharp endgame execution and exact resource math:
 
-> *"Final VP: 3 settlements (3) + 2 cities (4) + longest road (2) + new settlement (1) = 10 VP. GAME WON."*
+> *Final VP: 3 settlements (3) + 2 cities (4) + longest road (2) + new settlement (1) = 10 VP. GAME WON.*
 
 No hesitation, no miscounting. But Haiku 4.5 also produced the single worst performance in the entire tournament.
 
@@ -111,7 +111,7 @@ In Game 40, Haiku 4.5 reached 8 VP on turn 31. It needed one more settlement to 
 
 Instead, it ended its turn. And then it ended its turn again. And again.
 
-> Turn 279: *"Hand is B=1,S=4,H=1. Cannot build settlement at node 21 yet (need W=1,B=1,S=1,H=1; missing W). Better to end turn, hope for resource roll, then build next turn."*
+> Turn 279: *Hand is B=1,S=4,H=1. Cannot build settlement at node 21 yet (need W=1,B=1,S=1,H=1; missing W). Better to end turn, hope for resource roll, then build next turn.*
 
 It wrote some version of this 256 times. Two hundred and fifty-six consecutive turns of ending and hoping, while Gemini 3 Flash slowly accumulated dev cards and won the game on turn 288.
 
@@ -130,7 +130,7 @@ I implemented domestic trading expecting it to be a major differentiator. It was
 
 Sonnet 4.5 proposed about 8 trades per game. Roughly 1 in 8 was accepted. Gemini 2.5 Flash proposed 9 trades across all 48 games, every single one rejected. The overall acceptance rate hovered around 8%.
 
-The proposals aren't terrible. They follow the right format, target the right players, request reasonable resources. But they fail to model what the opponent actually needs. They're proposals written from a single perspective. Human Catan trading works because you say "I know you need brick, and I have extra, so give me wheat." The models say "give me wheat" without checking whether the opponent has wheat to spare.
+The proposals aren't terrible: they follow the right format, target the right players, and request reasonable resources. However they fail to model what the opponent actually needs. They're proposals written from a single perspective. Human Catan trading works because you say "I know you need brick, and I have extra, so give me wheat." The models say "give me wheat" without checking whether the opponent has wheat to spare.
 
 The Claude models were worse as responders than as proposers. They rejected trades that would have objectively helped them, often citing an unwillingness to "help" an opponent who was in last place. Every trade was evaluated as zero-sum when most Catan trades are positive-sum.
 

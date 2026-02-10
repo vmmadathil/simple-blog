@@ -17,6 +17,8 @@ function formatTitle(slug: string): string {
     .map(word => {
       if (word.toLowerCase() === 'ai') return 'AI';
       if (word.toLowerCase() === 'rag') return 'RAG';
+      if (word.toLowerCase() === 'llms') return 'LLMs';
+      if (word.toLowerCase() === 'llm') return 'LLM';
       return word;
     })
     .join(' ')

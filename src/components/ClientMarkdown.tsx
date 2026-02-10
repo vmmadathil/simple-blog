@@ -1,9 +1,11 @@
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import MermaidDiagram from './MermaidDiagram'
 
 export default function ClientMarkdown({ content }: { content: string }) {
   return (
     <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
       components={{
         code({ className, children, ...props }: any) {
           const match = /language-(\w+)/.exec(className || '')
