@@ -51,11 +51,11 @@ I logged every reasoning string and scratchpad entry. Reading thousands of these
 
 Its opening-turn scratchpad:
 
-> *"Node 20 has the highest total pips (15) on the board, providing high-probability access to Ore (8), Wheat (6), and Wood (8). This sets up a strong foundation for both early expansion and late-game city building."*
+> *Node 20 has the highest total pips (15) on the board, providing high-probability access to Ore (8), Wheat (6), and Wood (8). This sets up a strong foundation for both early expansion and late-game city building.*
 
 It calculates pip counts correctly, evaluates port positions, tracks every opponent's VP, and plans multi-action sequences in its scratchpad several turns ahead. When it holds hidden VP development cards, it reasons about them precisely:
 
-> *"I have 8 VP (6 visible + 2 hidden). I need 2 more VP."*
+> *I have 8 VP (6 visible + 2 hidden). I need 2 more VP.*
 
 The most important thing Gemini 3 Flash does, though, is something none of the other models do reliably: it changes its mind. After 64 turns of buying development cards without drawing a VP, it pivoted to settlement building. When ore production dried up in another game, it abandoned its city strategy entirely and rebuilt toward Longest Road. The word "pivot" appears in its scratchpad more than in any other model's entire output. The losing models would correct arithmetic mistakes but never ask whether the plan itself was wrong.
 
@@ -65,13 +65,13 @@ Gemini 2.5 Flash won 1 game out of 48, and the traces explain why with uncomfort
 
 The system prompt says, in plain English: *"Victory Point cards are kept hidden in your hand. They automatically count toward your VP total — you do NOT need to play them."*
 
-Gemini 2.5 Flash read this and decided that playing a knight reveals a hidden VP card.
+Gemini 2.5 Flash read this and decided that playing a knight reveals a hidden VP card, which it obviously doesn't.
 
 From Game 12, turn 117:
 
-> *"Play Knight to activate one of my hidden VP cards and reach 9 VP."*
+> *Play Knight to activate one of my hidden VP cards and reach 9 VP.*
 >
-> Scratchpad: *"My actual VP is 8 (6 shown + 2 hidden VP cards). Playing Knight will reveal one VP, bringing me to 9 VP."*
+> Scratchpad: *"My actual VP is 8 (6 shown + 2 hidden VP cards). Playing Knight will reveal one VP, bringing me to 9 VP.*
 
 Knights move the robber. That's all they do. They have nothing to do with VP cards. But this belief appears across multiple games. The model has fused two unrelated mechanics into a single confused action. In several games, it reached what should have been a winning VP total and then spent dozens of turns cycling through knight plays waiting for the game to acknowledge its victory.
 
@@ -85,7 +85,7 @@ Sonnet 4.5 won 8 games and earned a clear second place. Its traces read like a c
 
 Its best game was a 112-turn Longest Road steal:
 
-> *"Building road (37,38) extends my network to 11 roads, stealing Longest Road from ORANGE. This gives me 7+2(LR)+1(VP card)=10 VP for immediate victory!"*
+> *Building road (37,38) extends my network to 11 roads, stealing Longest Road from ORANGE. This gives me 7+2(LR)+1(VP card)=10 VP for immediate victory!*
 
 That's three VP sources combined in one move: visible VP, a Longest Road steal, and a hidden dev card, calculated correctly under pressure. When Sonnet 4.5 executes, it executes well.
 
@@ -95,7 +95,7 @@ Its weakness is tempo. Average winning game: 186 turns, versus 156 for Gemini 3 
 
 Its pip counting, for whatever it's worth, is impeccable:
 
-> *"Node 27 touches T7 (S #12=1pip), T8 (O #10=3pips), T1 (W #8=5pips). Total 9 pips."*
+> *Node 27 touches T7 (S #12=1pip), T8 (O #10=3pips), T1 (W #8=5pips). Total 9 pips.*
 
 12→1, 10→3, 8→5. All correct. Whatever conceptual gap existed in earlier versions of Sonnet 4.5 around dice probability isn't present here.
 
