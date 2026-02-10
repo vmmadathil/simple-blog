@@ -4,13 +4,13 @@ Chess and Go have been the standard tests of machine game-playing for decades. B
 
 If you believe LLM agents are going to negotiate contracts, manage supply chains, or broker deals on our behalf, you probably want to know how they handle a situation where four parties with competing interests have to trade, plan under uncertainty, and adapt to each other in real time. Settlers of Catan is a pretty good proxy. You're managing scarce resources, reading the table, negotiating trades, making probabilistic bets on dice rolls, and navigating a four-player economy where helping yourself sometimes means helping your opponent. It's the kind of messy, multi-stakeholder problem that frontier LLMs should theoretically be good at, and the kind that's hard to benchmark with multiple choice questions.
 
-So I sat four LLMs down at a Catan table: Claude Sonnet 4.5, Claude Haiku 4.5, Gemini 2.5 Flash, and Gemini 3 Flash Preview. No fine-tuning, no MCTS, and no RL. Just a text prompt describing the board, the rules, and a numbered list of legal moves. They pick one, explain why, and jot notes to themselves for next turn. I made them play forty-eight games, spanning about 13,000 API calls and spending $25 in compute. 
+So I sat four LLMs down at a Catan table: Claude Sonnet 4.5, Claude Haiku 4.5, Gemini 2.5 Flash, and Gemini 3 Flash Preview. No fine-tuning, no MCTS, and no RL. Just a text prompt describing the board, the rules, and a numbered list of legal moves. They pick one, explain why, and jot notes to themselves for next turn. I made them play forty-eight games, spanning about 13,000 API calls and spending $25 in API calls. 
 
 ## How It Works
 
 Each game runs on [Catanatron](https://github.com/bcollazo/catanatron), an open-source Catan engine that handles the rules, dice, and resource distribution. The models never touch the engine directly. They just see a text snapshot of the game state and choose from a list of legal actions by index.
 
-The system prompt gives them the full rules of Catan. Building costs, dice probabilities, how the robber works, what each development card does, how victory points are counted. I'm testing strategic reasoning, not whether the model memorized the rulebook from its training data.
+The system prompt gives them the full rules of Catan. Building costs, dice probabilities, how the robber works, what each development card does, how victory points are counted. The goal here to test **strategic reasoning**, not if the model has memorized the rulebook from its training data.
 
 Each turn, a model sees:
 
@@ -20,7 +20,7 @@ Each turn, a model sees:
 - Their scratchpad notes from the previous turn
 - A numbered list of legal actions
 
-They respond with JSON: an action index, a brief explanation, and updated scratchpad notes. The scratchpad is the closest thing they have to memory between turns, a 2000-character notepad that persists across the game. Models use it to track plans, count VP, and (sometimes) to write the same sentence 69 times in a row. More on that later.
+They respond with a JSON: an action index, a brief explanation, and updated scratchpad notes. The scratchpad is the closest thing they have to memory between turns, a 2000-character notepad that persists across the game. Models use it to track plans, count VP, and (sometimes) to write the same sentence 69 times in a row. This is intended to keep track of high-level strategy and trends in working memory, like human players.
 
 I also bolted on domestic trading. After each dice roll, the active player can propose a 1-for-1 trade to any opponent. The target independently accepts or rejects. This is the one piece of genuine multi-agent negotiation in the setup.
 
