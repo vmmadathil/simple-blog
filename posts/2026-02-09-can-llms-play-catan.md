@@ -1,8 +1,8 @@
 # Can LLMs Play Catan?
 
-Chess and Go have been the standard tests of machine game-playing for decades. But they're also clean, sterile problems: two players, perfect information, zero-sum. The strategic reasoning most of us do every day looks nothing like that.
+Chess and Go have been the standard tests of machine game-playing for decades, but they're also clean, sterile problems. The strategic reasoning most of us do at work every day looks nothing like that.
 
-If you believe LLM agents are going to negotiate contracts, manage supply chains, or broker deals on our behalf, you probably want to know how they handle a situation where four parties with competing interests have to trade, plan under uncertainty, and adapt to each other in real time. Settlers of Catan is a pretty good proxy. You're managing scarce resources, reading the table, negotiating trades, making probabilistic bets on dice rolls, and navigating a four-player economy where helping yourself sometimes means helping your opponent. It's the kind of messy, multi-stakeholder problem that frontier LLMs should theoretically be good at, and the kind that's hard to benchmark with multiple choice questions.
+If you believe LLM agents are going to negotiate contracts, manage supply chains, or broker deals on our behalf, you probably want to know how they handle a situation where four parties with competing interests have to trade, plan under uncertainty, and adapt to each other in real time. Settlers of Catan is a pretty good proxy. It's the kind of messy, multi-stakeholder problem that frontier LLMs should theoretically be good at, and the kind that's hard to benchmark with multiple choice questions.
 
 So I sat four LLMs down at a Catan table: Claude Sonnet 4.5, Claude Haiku 4.5, Gemini 2.5 Flash, and Gemini 3 Flash Preview. No fine-tuning, no MCTS, and no RL. Just a text prompt describing the board, the rules, and a numbered list of legal moves. They pick one, explain why, and jot notes to themselves for next turn. I made them play forty-eight games, spanning about 13,000 API calls and spending $25 in API calls. 
 
